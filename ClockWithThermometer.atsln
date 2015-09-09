@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "ClockWithTermometer", "ClockWithTermometer\ClockWithTermometer.cppproj", "{BC32E042-342C-46CC-8724-654E6AE64920}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BC32E042-342C-46CC-8724-654E6AE64920}.Debug|AVR.ActiveCfg = Debug|AVR
+		{BC32E042-342C-46CC-8724-654E6AE64920}.Debug|AVR.Build.0 = Debug|AVR
+		{BC32E042-342C-46CC-8724-654E6AE64920}.Release|AVR.ActiveCfg = Release|AVR
+		{BC32E042-342C-46CC-8724-654E6AE64920}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
