@@ -95,25 +95,25 @@ void Device::Initialize(void)
 	init_timer2();
 }
 //---------------------------------------------------------------------------
-
-void Device::InitTimer0(void)
-{
-	//TCCR0 = _BV(CS02);// | _BV(CS01) | _BV(CS00);
-	TCCR0 = _BV(CS01);
-	TIMSK |= _BV(TOIE0);
-}
-//---------------------------------------------------------------------------
+//
+//void Device::InitTimer0(void)
+//{
+	////TCCR0 = _BV(CS02);// | _BV(CS01) | _BV(CS00);
+	//TCCR0 = _BV(CS01);
+	//TIMSK |= _BV(TOIE0);
+//}
+////---------------------------------------------------------------------------
 
 void Device::init_timer2(void)  //Инициализация таймера/счетчика2
-{
-	OCR2 = 60;
-	//TCCR2 = _BV(WGM21) | _BV(CS22) | _BV(CS21);// | _BV(CS20);
-	TCCR2 = _BV(WGM21) | _BV(CS22);// | _BV(CS21); | _BV(CS20);
-	TIMSK |= _BV(OCIE2);  //Устанавливаем для него прерывание совпадения
+{		
+	OCR2A = 60;
+	TCCR2A = _BV(WGM21);
+	TCCR2B = _BV(CS22);
+	TIMSK2 |= _BV(OCIE2A);  //Устанавливаем для него прерывание совпадения
 }
 //---------------------------------------------------------------------------
 
-ISR(TIMER2_COMP_vect)
+ISR(TIMER2_COMPA_vect)
 {	
 	DateTime::OnMillisecondsTick();
 	DateTime::OnSecondsTick();
