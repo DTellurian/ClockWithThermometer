@@ -5,7 +5,7 @@
     <ProjectVersion>6.2</ProjectVersion>
     <ToolchainName>com.Atmel.AVRGCC8.CPP</ToolchainName>
     <ProjectGuid>{bc32e042-342c-46cc-8724-654e6ae64920}</ProjectGuid>
-    <avrdevice>ATmega328P</avrdevice>
+    <avrdevice>ATmega8</avrdevice>
     <avrdeviceseries>none</avrdeviceseries>
     <OutputType>Executable</OutputType>
     <Language>CPP</Language>
@@ -37,6 +37,7 @@
   </dependencies>
 </framework-data>
     </AsfFrameworkConfig>
+    <avrtool />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>
@@ -91,7 +92,7 @@
       <Value>DEBUG</Value>
     </ListValues>
   </avrgcc.compiler.symbols.DefSymbols>
-  <avrgcc.compiler.optimization.level>Optimize (-O1)</avrgcc.compiler.optimization.level>
+  <avrgcc.compiler.optimization.level>Optimize for size (-Os)</avrgcc.compiler.optimization.level>
   <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
   <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
   <avrgcc.compiler.optimization.DebugLevel>Default (-g2)</avrgcc.compiler.optimization.DebugLevel>
@@ -103,7 +104,7 @@
       <Value>DEBUG</Value>
     </ListValues>
   </avrgcccpp.compiler.symbols.DefSymbols>
-  <avrgcccpp.compiler.optimization.level>Optimize (-O1)</avrgcccpp.compiler.optimization.level>
+  <avrgcccpp.compiler.optimization.level>Optimize for size (-Os)</avrgcccpp.compiler.optimization.level>
   <avrgcccpp.compiler.optimization.PackStructureMembers>True</avrgcccpp.compiler.optimization.PackStructureMembers>
   <avrgcccpp.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcccpp.compiler.optimization.AllocateBytesNeededForEnum>
   <avrgcccpp.compiler.optimization.DebugLevel>Default (-g2)</avrgcccpp.compiler.optimization.DebugLevel>
@@ -118,9 +119,156 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BaseTypes\CFDate.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="BaseTypes\CFDate.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="BaseTypes\CFTime.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="BaseTypes\CFTime.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="BaseTypes\DateTime.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="BaseTypes\DateTime.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="BaseTypes\Pin.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="BaseTypes\Pin.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="BaseTypes\Port.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="BaseTypes\Port.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="BaseTypes\rtc.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="BaseTypes\rtc.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="BaseTypes\RtcDefines.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Buttons\Button.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Buttons\Button.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Buttons\ButtonsController.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Buttons\ButtonsController.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Buttons\ButtonsControllerConsumer.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Buttons\ButtonsControllerDefines.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Buttons\SimpleButton.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Buttons\SimpleButton.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="ClockWithTermometer.cpp">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Device.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Device.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DeviceConfiguration.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Device\Ports.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Device\Ports.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="LedHelper.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="LedHelper.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ModesSupport\Mode.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ModesSupport\Mode.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ModesSupport\ModesController.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ModesSupport\ModesController.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Modes\MainMode.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Modes\MainMode.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Modes\TimerMode.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Modes\TimerMode.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Modes\TimeSetMode.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Modes\TimeSetMode.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="SevenDigitLed\BitLedState.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="SevenDigitLed\BitLedState.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="SevenDigitLed\BitStateLedController.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="SevenDigitLed\BitStateLedController.h">
+      <SubType>compile</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BaseTypes" />
+    <Folder Include="Buttons" />
+    <Folder Include="Device" />
+    <Folder Include="Layout" />
+    <Folder Include="Modes" />
+    <Folder Include="ModesSupport" />
+    <Folder Include="Simulation" />
+    <Folder Include="SevenDigitLed" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Layout\SimpleClock_V_1.1.lay">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Layout\SimpleClock_V_1.1_Enterprise.lay">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Simulation\SimpleClock.DSN">
+      <SubType>compile</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>

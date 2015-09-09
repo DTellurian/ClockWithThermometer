@@ -1,4 +1,6 @@
 Thumbs.db
+
+*.atsuo
 *.obj
 *.exe
 *.pdb
