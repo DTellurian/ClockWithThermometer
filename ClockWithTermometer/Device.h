@@ -25,7 +25,7 @@
 #define BUTTON_INTERRUPT_TIMEOUT_MS 100
 //---------------------------------------------------------------------------
 
-//#define SIMULATION
+#define SIMULATION
 
 enum DeviceStates
 {
