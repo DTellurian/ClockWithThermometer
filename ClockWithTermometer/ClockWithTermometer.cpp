@@ -81,6 +81,7 @@ int main(void)
 		Device::buttonsControllerPtr->ButtonsControllerOnTick();
 		Device::modesControllerPtr->currentModePtr->ProceedModeOnTick();
 		Device::ledHelperPtr->ProceedTick();
+		
 		continue;
 	}
 }

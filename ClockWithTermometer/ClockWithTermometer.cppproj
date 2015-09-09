@@ -5,7 +5,7 @@
     <ProjectVersion>6.2</ProjectVersion>
     <ToolchainName>com.Atmel.AVRGCC8.CPP</ToolchainName>
     <ProjectGuid>{bc32e042-342c-46cc-8724-654e6ae64920}</ProjectGuid>
-    <avrdevice>ATmega8</avrdevice>
+    <avrdevice>ATmega328P</avrdevice>
     <avrdeviceseries>none</avrdeviceseries>
     <OutputType>Executable</OutputType>
     <Language>CPP</Language>
@@ -260,10 +260,10 @@
     <Folder Include="SevenDigitLed" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Layout\SimpleClock_V_1.1.lay">
+    <None Include="Layout\ClockWithThermometer_v1.0.lay">
       <SubType>compile</SubType>
     </None>
-    <None Include="Layout\SimpleClock_V_1.1_Enterprise.lay">
+    <None Include="Layout\ClockWithThermometer_v1.0_Enterprise.lay">
       <SubType>compile</SubType>
     </None>
     <None Include="Simulation\SimpleClock.DSN">

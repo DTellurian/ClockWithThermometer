@@ -59,7 +59,7 @@ class Device
 		Device(Device&);
 		
 		static BitStateLedController bitStateLedController;
-		static void InitTimer0(void);
+		//static void InitTimer0(void);
 		static void init_timer2(void);
 };
 
