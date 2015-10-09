@@ -27,13 +27,15 @@ Sensor1Mode::~Sensor1Mode()
 //---------------------------------------------------------------------------
 void Sensor1Mode::ProceedModeOnTick(void)
 {
-	BitLedState::SetDigitState(displayValue, Device::bitStateLedControllerPtr->digitStates[1], Device::bitStateLedControllerPtr->digitStates[0]);
-	BitLedState::SetDigitState(0, Device::bitStateLedControllerPtr->digitStates[3], Device::bitStateLedControllerPtr->digitStates[2]);
+	ReadAndDisplay();
+	//BitLedState::SetDigitState(displayValue, Device::bitStateLedControllerPtr->digitStates[1], Device::bitStateLedControllerPtr->digitStates[0]);
+	//BitLedState::SetDigitState(0, Device::bitStateLedControllerPtr->digitStates[3], Device::bitStateLedControllerPtr->digitStates[2]);
 }
 //---------------------------------------------------------------------------
 
 void Sensor1Mode::EnterMode(void)
 {
+	ReadAndDisplay();
 }
 //---------------------------------------------------------------------------
 
@@ -57,14 +59,14 @@ void Sensor1Mode::ProceedButtonUpFire(Button* buttonPtr, uint8_t& handled)
 void Sensor1Mode::ReadAndDisplay(void)
 {
 	uint8_t checkResult = Device::oneWireContextPtr->ReadTemperature(&temperatureToShow);
-		
+	
 	if(checkResult)
-	Device::ShowTemperature(temperatureToShow);
+		Device::ShowTemperature(temperatureToShow);
 	else
 	{
 		BitLedState::SetDigitState(0, Device::bitStateLedControllerPtr->digitStates[1], Device::bitStateLedControllerPtr->digitStates[0]);
 		BitLedState::SetDigitState(0, Device::bitStateLedControllerPtr->digitStates[3], Device::bitStateLedControllerPtr->digitStates[2]);
-	}
+	}	
 }
 //---------------------------------------------------------------------------
 #else

@@ -48,6 +48,8 @@ uint8_t OneWireContext::ReadTemperature(uint16_t* temperature)
 			searchFlag = SENSORS_FOUND;
 			currentSensorIndex = 0;
 		}
+		else
+			return 0;
 	}
 	
 	crcFlag = DS18B20_ReadTemperature(BUS, allDevices[currentSensorIndex].id, temperature);
@@ -56,6 +58,10 @@ uint8_t OneWireContext::ReadTemperature(uint16_t* temperature)
 	{
 		searchFlag = SEARCH_SENSORS;
 		_delay_ms(3000);
-	}	
+		
+		return 0;
+	}
+	
+	return 1;
 }
 //---------------------------------------------------------------------------
