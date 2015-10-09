@@ -16,7 +16,7 @@
 #include "SevenDigitLed\BitLedState.h"
 #include "BaseTypes\CFTime.h"
 #include "BaseTypes\DateTime.h"
-
+#include "DS18B20Support\DS18B20.h"
 //---------------------------------------------------------------------------
 
 #define APIN pinB5
@@ -51,8 +51,10 @@ Button* Device::bottomButtonPtr;
 MainMode* Device::mainModePtr;
 TimeSetMode* Device::timeSetModePtr;
 TimerMode* Device::timerModePtr;
+Sensor1Mode* Device::sensor1ModePtr;
 
 LedHelper* Device::ledHelperPtr;
+OneWireContext* Device::oneWireContextPtr;
 //---------------------------------------------------------------------------
 
 void Device::Initialize(void)
@@ -87,6 +89,8 @@ void Device::Initialize(void)
 	Device::bottomButtonPtr->SetSealingDelay(150, 150);
 	Device::bottomButtonPtr->enabledButtonUpFire = 1;
 	Device::bottomButtonPtr->buttonUpDelayMs = 50;
+	
+	Device::oneWireContextPtr->Init();
 	
 	DateTime::Initialize(260, 4);
 	
@@ -135,5 +139,47 @@ void Device::SetCurrentTiem(CFTime* timePtr)
 	currentTime.hour = timePtr->GetHours();
 	currentTime.minute = timePtr->GetMinutes();
 	set_date_time(currentTime);
+}
+//---------------------------------------------------------------------------
+
+void Device::ShowTemperature(uint16_t temperatureValue)
+{
+	uint8_t isPositive = 0;
+	uint8_t integralPart = 0;
+	uint8_t fractionPart = 0;
+
+	BitLedState::SetDot(0, Device::bitStateLedControllerPtr->digitStates[2]);
+	BitLedState::SetDot(1, Device::bitStateLedControllerPtr->digitStates[1]);
+
+	ConvertTemperatureMeasurement(temperatureValue, isPositive, integralPart, fractionPart);
+	
+	cli();
+	//currentState = __save_interrupt();
+	//__disable_interrupt();
+	
+	if(integralPart > 9)
+	{
+		if(isPositive)
+		BitLedState::ClearDigit(bitStateLedControllerPtr->digitStates[3]);
+		else
+		BitLedState::SetMinus(bitStateLedControllerPtr->digitStates[3]);
+		
+		BitLedState::SetDigitState(integralPart, bitStateLedControllerPtr->digitStates[2], bitStateLedControllerPtr->digitStates[1]);
+		BitLedState::SetDigitState(fractionPart, bitStateLedControllerPtr->digitStates[0]);
+	}
+	else
+	{
+		BitLedState::ClearDigit(bitStateLedControllerPtr->digitStates[3]);
+		
+		if(isPositive)
+		BitLedState::ClearDigit(bitStateLedControllerPtr->digitStates[2]);
+		else
+		BitLedState::SetMinus(bitStateLedControllerPtr->digitStates[2]);
+		
+		BitLedState::SetDigitState(integralPart, bitStateLedControllerPtr->digitStates[1]);
+		BitLedState::SetDigitState(fractionPart, bitStateLedControllerPtr->digitStates[0]);
+	}
+	//__restore_interrupt(currentState);
+	sei();
 }
 //---------------------------------------------------------------------------

@@ -19,13 +19,15 @@
 #include "Modes/TimeSetMode.h"
 #include "LedHelper.h"
 #include "Modes/TimerMode.h"
+#include "Modes/Sensor1Mode.h"
+#include "DS18B20Support/OneWireContext.h"
 //---------------------------------------------------------------------------
 
 //Время подавления дребезга нажатия кнопки.
 #define BUTTON_INTERRUPT_TIMEOUT_MS 100
 //---------------------------------------------------------------------------
 
-#define SIMULATION
+//#define SIMULATION
 
 enum DeviceStates
 {
@@ -49,11 +51,15 @@ class Device
 		static MainMode* mainModePtr;
 		static TimeSetMode* timeSetModePtr;
 		static TimerMode* timerModePtr;
+		static Sensor1Mode* sensor1ModePtr;
 
-		static LedHelper* ledHelperPtr;		
+		static LedHelper* ledHelperPtr;
+		
+		static OneWireContext* oneWireContextPtr;
 		
 		static CFTime GetCurrentTime(void);
 		static void SetCurrentTiem(CFTime* timePtr);
+		static void ShowTemperature(uint16_t temperatureValue);
 	private:
 		Device(void);
 		Device(Device&);

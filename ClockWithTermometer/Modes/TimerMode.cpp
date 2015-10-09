@@ -52,7 +52,8 @@ void TimerMode::ProceedButtonUpFire(Button* buttonPtr, uint8_t& handled)
 		handled = 1;
 		
 		if(buttonPtr == Device::topButtonPtr)
-			Device::modesControllerPtr->SetCurrentMode(Device::mainModePtr);
+			Device::modesControllerPtr->SetCurrentMode(Device::sensor1ModePtr);
+			//Device::modesControllerPtr->SetCurrentMode(Device::mainModePtr);
 		else if(buttonPtr == Device::bottomButtonPtr)
 		{
 			if(!isRun)

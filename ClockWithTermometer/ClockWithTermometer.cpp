@@ -6,6 +6,7 @@
  */ 
 
 //---------------------------------------------------------------------------
+
 #include "DeviceConfiguration.h"
 
 #include <avr\io.h>
@@ -14,10 +15,8 @@
 #include "Device.h"
 #include "Device\Ports.h"
 #include "BaseTypes\rtc.h"
-#include "ModesSupport\ModesController.h"
-#include "Modes\MainMode.h"
-#include "Buttons\SimpleButton.h"
-#include "Modes\TimeSetMode.h"
+#include "ModesSupport/ModesController.h"
+#include "Buttons/SimpleButton.h"
 //---------------------------------------------------------------------------
 
 #include "BaseTypes/DateTime.h"
@@ -52,6 +51,13 @@ int main(void)
 	TimerMode timerMode = TimerMode();
 	Device::timerModePtr = &timerMode;
 	Device::buttonsControllerPtr->AttachConsumer(Device::timerModePtr);
+	
+	Sensor1Mode sensor1Mode = Sensor1Mode();
+	Device::sensor1ModePtr = &sensor1Mode;
+	Device::buttonsControllerPtr->AttachConsumer(Device::sensor1ModePtr);
+	
+	OneWireContext oneWireContext = OneWireContext(2);
+	Device::oneWireContextPtr = &oneWireContext;
 	
 	Device::Initialize();
 	

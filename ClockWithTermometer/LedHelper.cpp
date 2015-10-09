@@ -13,7 +13,7 @@
 //---------------------------------------------------------------------------
 
 LedHelper::LedHelper(void)
-	:leftSideBlinkEnabled(0), rightSideBlinkEnabled(0), pointBlinkEnabled(0), millisecondToBlink(0), leftSideVisibility(1), rightSideVisibility(1)
+	:leftSideBlinkEnabled(0), leftSideVisibility(1), rightSideBlinkEnabled(0), rightSideVisibility(1), pointBlinkEnabled(0), millisecondToBlink(0)
 {
 	
 }
