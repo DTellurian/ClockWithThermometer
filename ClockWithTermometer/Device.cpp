@@ -51,7 +51,7 @@ Button* Device::bottomButtonPtr;
 MainMode* Device::mainModePtr;
 TimeSetMode* Device::timeSetModePtr;
 TimerMode* Device::timerModePtr;
-Sensor1Mode* Device::sensor1ModePtr;
+SensorsMode* Device::sensor1ModePtr;
 
 LedHelper* Device::ledHelperPtr;
 OneWireContext* Device::oneWireContextPtr;

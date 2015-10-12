@@ -28,17 +28,19 @@ class OneWireContext
 		
 		void Init(void);		
 		uint8_t ReadTemperature(uint16_t* temperature);
+				
+		uint8_t currentSensorIndex;
+		uint8_t IsSearchState(void);
+		uint8_t SetNextSensor(void);
 	protected:
-			//OWI_device allDevices[MAX_DEVICES];
-			OWI_device* allDevices;
-			unsigned char rom[8];
-			
-			unsigned char searchFlag;
-			unsigned char crcFlag;
-			unsigned char sensorsCount;
-			
-			uint8_t currentSensorIndex;						
-	
+		//OWI_device allDevices[MAX_DEVICES];
+		OWI_device* allDevices;
+		unsigned char rom[8];
+		
+		unsigned char searchFlag;			
+		unsigned char crcFlag;
+		unsigned char sensorsCount;
+		
 	private:
 		//OneWireContext( const OneWireContext &c );
 		OneWireContext& operator=( const OneWireContext &c );

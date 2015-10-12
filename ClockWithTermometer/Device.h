@@ -19,7 +19,7 @@
 #include "Modes/TimeSetMode.h"
 #include "LedHelper.h"
 #include "Modes/TimerMode.h"
-#include "Modes/Sensor1Mode.h"
+#include "Modes/SensorsMode.h"
 #include "DS18B20Support/OneWireContext.h"
 //---------------------------------------------------------------------------
 
@@ -51,7 +51,7 @@ class Device
 		static MainMode* mainModePtr;
 		static TimeSetMode* timeSetModePtr;
 		static TimerMode* timerModePtr;
-		static Sensor1Mode* sensor1ModePtr;
+		static SensorsMode* sensor1ModePtr;
 
 		static LedHelper* ledHelperPtr;
 		

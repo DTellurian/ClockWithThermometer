@@ -35,9 +35,19 @@ void LedHelper::ShowTime(CFTime* timePtr, uint8_t showSeconds)
 
 	if(!rightSideBlinkEnabled || rightSideVisibility)
 		BitLedState::SetDigitState(timePtr->GetMinutes(), Device::bitStateLedControllerPtr->digitStates[1], Device::bitStateLedControllerPtr->digitStates[0]);
-		
+	
+	uint8_t hours = timePtr->GetHours();
+	
 	if(!leftSideBlinkEnabled || leftSideVisibility)
-		BitLedState::SetDigitState(timePtr->GetHours(), Device::bitStateLedControllerPtr->digitStates[3], Device::bitStateLedControllerPtr->digitStates[2]);
+	{				
+		if(hours < 10)
+		{
+			BitLedState::ClearDigit(Device::bitStateLedControllerPtr->digitStates[3]);
+			BitLedState::SetDigitState(hours, Device::bitStateLedControllerPtr->digitStates[2]);	
+		}
+		else
+			BitLedState::SetDigitState(hours, Device::bitStateLedControllerPtr->digitStates[3], Device::bitStateLedControllerPtr->digitStates[2]);	
+	}
 }
 //---------------------------------------------------------------------------
 

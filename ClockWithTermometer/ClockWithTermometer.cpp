@@ -17,12 +17,13 @@
 #include "BaseTypes\rtc.h"
 #include "ModesSupport/ModesController.h"
 #include "Buttons/SimpleButton.h"
+#include "SevenDigitLed/BitLedStateLetterHelper.h"
 //---------------------------------------------------------------------------
 
 #include "BaseTypes/DateTime.h"
 
 int main(void)
-{
+{	
 	LedHelper ledHelper = LedHelper();
 	Device::ledHelperPtr = &ledHelper;
 	
@@ -52,7 +53,7 @@ int main(void)
 	Device::timerModePtr = &timerMode;
 	Device::buttonsControllerPtr->AttachConsumer(Device::timerModePtr);
 	
-	Sensor1Mode sensor1Mode = Sensor1Mode();
+	SensorsMode sensor1Mode = SensorsMode();
 	Device::sensor1ModePtr = &sensor1Mode;
 	Device::buttonsControllerPtr->AttachConsumer(Device::sensor1ModePtr);
 	
@@ -80,7 +81,14 @@ int main(void)
 		set_date_time(dt);
 	}
 	
-	Device::modesControllerPtr->SetCurrentMode(Device::mainModePtr);
+	Device::modesControllerPtr->SetCurrentMode(Device::mainModePtr);	
+	
+	BitLedStateLetterHelper::SetH(Device::bitStateLedControllerPtr->digitStates[3]);
+	BitLedStateLetterHelper::SetE(Device::bitStateLedControllerPtr->digitStates[2]);
+	BitLedStateLetterHelper::SetL(Device::bitStateLedControllerPtr->digitStates[1]);
+	BitLedStateLetterHelper::SetO(Device::bitStateLedControllerPtr->digitStates[0]);
+	
+	_delay_ms(5000);
 	
 	while(1)
 	{

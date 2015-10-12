@@ -1,5 +1,5 @@
 /* 
-* Sensor1Mode.h
+* SensorsMode.h
 *
 * Created: 09.10.2015 8:43:09
 * Author: Mihalych
@@ -13,7 +13,7 @@
 #include "..\ModesSupport\Mode.h"
 #include "..\Buttons\ButtonsControllerConsumer.h"
 //---------------------------------------------------------------------------
-class Sensor1Mode : public Mode, public ButtonsControllerConsumer
+class SensorsMode : public Mode, public ButtonsControllerConsumer
 {
 	//variables
 	public:
@@ -22,23 +22,25 @@ class Sensor1Mode : public Mode, public ButtonsControllerConsumer
 
 	//functions
 	public:
-		Sensor1Mode(void);
-		~Sensor1Mode();
+		SensorsMode(void);
+		~SensorsMode();
 		
 		virtual void ProceedModeOnTick(void);
 		virtual void EnterMode(void);
+		virtual void ExitMode(void);
 		virtual void ProceedButtonFire(Button* buttonPtr, uint8_t isSealedFire, uint8_t sealedFireNumber, uint8_t& handled);
 		virtual void ProceedButtonUpFire(Button* buttonPtr, uint8_t& handled);
 	protected:
 	private:
-		//Sensor1Mode( const Sensor1Mode &c );
-		Sensor1Mode& operator=( const Sensor1Mode &c );
+		//SensorsMode( const SensorsMode &c );
+		SensorsMode& operator=( const SensorsMode &c );
 		
 		uint8_t displayValue;
 		uint16_t temperatureToShow;
+		uint64_t nextMillisecondsToMeasure;
 		
 		void ReadAndDisplay(void);
 
-}; //Sensor1Mode
+}; //SensorsMode
 //---------------------------------------------------------------------------
 #endif //__SENSOR1MODE_H__
