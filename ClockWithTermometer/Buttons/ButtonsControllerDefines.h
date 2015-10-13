@@ -14,6 +14,6 @@
 //---------------------------------------------------------------------------
 
 #define ButtonsControllerButtonsCount 2
-#define ButtonsControllerConsumersCount 5
+#define ButtonsControllerConsumersCount 6
 //---------------------------------------------------------------------------
 #endif /* BUTTONSCONTROLLERDEFINES_H_ */

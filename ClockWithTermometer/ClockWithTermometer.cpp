@@ -53,9 +53,17 @@ int main(void)
 	Device::timerModePtr = &timerMode;
 	Device::buttonsControllerPtr->AttachConsumer(Device::timerModePtr);
 	
-	SensorsMode sensor1Mode = SensorsMode();
-	Device::sensor1ModePtr = &sensor1Mode;
+	SensorsMode sensorsMode = SensorsMode();
+	Device::sensor1ModePtr = &sensorsMode;
 	Device::buttonsControllerPtr->AttachConsumer(Device::sensor1ModePtr);
+	
+	MonitorMode monitorMode = MonitorMode();
+	Device::monitorModePtr = &monitorMode;
+	Device::buttonsControllerPtr->AttachConsumer(Device::monitorModePtr);
+	
+	IdleMode idleMode = IdleMode();
+	Device::idleModePtr = &idleMode;
+	Device::buttonsControllerPtr->AttachConsumer(Device::idleModePtr);
 	
 	OneWireContext oneWireContext = OneWireContext(2);
 	Device::oneWireContextPtr = &oneWireContext;

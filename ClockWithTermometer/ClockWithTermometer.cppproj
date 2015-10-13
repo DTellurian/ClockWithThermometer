@@ -264,10 +264,22 @@
     <Compile Include="ModesSupport\ModesController.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Modes\IdleMode.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Modes\IdleMode.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Modes\MainMode.cpp">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Modes\MainMode.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Modes\MonitorMode.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Modes\MonitorMode.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Modes\SensorsMode.cpp">

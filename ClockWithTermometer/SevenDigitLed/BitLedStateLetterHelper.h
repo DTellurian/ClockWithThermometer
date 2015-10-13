@@ -31,7 +31,7 @@ class BitLedStateLetterHelper
 		static void SetO(uint8_t& digitState);
 		static void SetS(uint8_t& digitState);
 		static void SetF(uint8_t& digitState);
-		static void Circle(uint8_t& digitState, uint16_t delayMs);
+		static void SetD(uint8_t& digitState);
 		
 		~BitLedStateLetterHelper();
 	protected:

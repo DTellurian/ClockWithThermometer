@@ -36,6 +36,7 @@ void OneWireContext::Init(void)
 }
 //---------------------------------------------------------------------------
 
+#ifndef SIMULATION
 uint8_t OneWireContext::ReadTemperature(uint16_t* temperature)
 {
 	if (searchFlag == SEARCH_SENSORS)
@@ -76,6 +77,19 @@ uint8_t OneWireContext::ReadTemperature(uint16_t* temperature)
 	
 	return 1;
 }
+//---------------------------------------------------------------------------
+
+#else
+//---------------------------------------------------------------------------
+
+uint8_t OneWireContext::ReadTemperature(uint16_t* temperature)
+{
+	searchFlag = SENSORS_FOUND;
+	temperature = 256;
+	return 1;
+	
+}
+#endif
 //---------------------------------------------------------------------------
 
 uint8_t OneWireContext::IsSearchState(void)

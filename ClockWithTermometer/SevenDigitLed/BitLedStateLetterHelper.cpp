@@ -47,7 +47,7 @@ void BitLedStateLetterHelper::SetR(uint8_t& digitState)
 
 void BitLedStateLetterHelper::SetI(uint8_t& digitState)
 {
-	digitState = 0b00001100;
+	digitState = 0b01100000;
 }
 //---------------------------------------------------------------------------
 
@@ -75,3 +75,8 @@ void BitLedStateLetterHelper::SetF(uint8_t& digitState)
 }
 //---------------------------------------------------------------------------
 
+void BitLedStateLetterHelper::SetD(uint8_t& digitState)
+{
+	digitState = 0b01111010;	
+}
+//---------------------------------------------------------------------------

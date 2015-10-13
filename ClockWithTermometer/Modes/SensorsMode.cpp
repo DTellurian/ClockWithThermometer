@@ -79,7 +79,7 @@ void SensorsMode::ProceedButtonUpFire(Button* buttonPtr, uint8_t& handled)
 		handled = 1;
 		
 		if(buttonPtr == Device::topButtonPtr)
-			Device::modesControllerPtr->SetCurrentMode(Device::mainModePtr);
+			Device::modesControllerPtr->SetCurrentMode(Device::monitorModePtr);
 		else if(buttonPtr == Device::bottomButtonPtr)
 		{
 			if(Device::oneWireContextPtr->IsSearchState())
@@ -93,7 +93,7 @@ void SensorsMode::ProceedButtonUpFire(Button* buttonPtr, uint8_t& handled)
 }
 //---------------------------------------------------------------------------
 
-#ifndef SIMULATION
+
 void SensorsMode::ReadAndDisplay(void)
 {
 	if(nextMillisecondsToMeasure > DateTime::milliseconds)
@@ -113,15 +113,7 @@ void SensorsMode::ReadAndDisplay(void)
 		BitLedStateLetterHelper::SetR(Device::bitStateLedControllerPtr->digitStates[0]);
 		
 		_delay_ms(1000);
-		Device::modesControllerPtr->SetCurrentMode(Device::mainModePtr);
+		Device::modesControllerPtr->SetCurrentMode(Device::monitorModePtr);
 	}	
 }
 //---------------------------------------------------------------------------
-#else
-void SensorsMode::ReadAndDisplay(void)
-{
-	BitLedState::SetDigitState(displayValue, Device::bitStateLedControllerPtr->digitStates[1], Device::bitStateLedControllerPtr->digitStates[0]);
-	BitLedState::SetDigitState(0, Device::bitStateLedControllerPtr->digitStates[3], Device::bitStateLedControllerPtr->digitStates[2]);
-}
-//---------------------------------------------------------------------------
-#endif
