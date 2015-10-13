@@ -42,6 +42,7 @@ void SensorsMode::EnterMode(void)
 	BitLedState::ClearDigit(Device::bitStateLedControllerPtr->digitStates[2]);
 	BitLedState::ClearDigit(Device::bitStateLedControllerPtr->digitStates[1]);
 	BitLedState::ClearDigit(Device::bitStateLedControllerPtr->digitStates[0]);
+	BitLedState::SetDot(0, Device::bitStateLedControllerPtr->digitStates[1]);
 	
 	if(Device::oneWireContextPtr->IsSearchState())
 	{
