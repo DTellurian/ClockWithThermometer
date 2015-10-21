@@ -101,7 +101,7 @@ void IdleMode::GoToSleep(void)
 	EIMSK &= ~_BV(INT0);
 	EIMSK &= ~_BV(INT1);
 			
-	wakeupTimeLimit = DateTime::milliseconds + 5000;	
+	wakeupTimeLimit = DateTime::milliseconds + WAKE_UP_BUTTON_DELAY_MS;
 }
 //---------------------------------------------------------------------------
 

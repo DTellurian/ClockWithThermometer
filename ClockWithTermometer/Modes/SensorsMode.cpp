@@ -16,7 +16,7 @@
 //---------------------------------------------------------------------------
 // default constructor
 SensorsMode::SensorsMode(void)
-	:displayValue(7), temperatureToShow(0), nextMillisecondsToMeasure(0)
+	:displayValue(7), nextMillisecondsToMeasure(0)
 {
 } //SensorsMode
 
@@ -46,10 +46,7 @@ void SensorsMode::EnterMode(void)
 	
 	if(Device::oneWireContextPtr->IsSearchState())
 	{
-		BitLedStateLetterHelper::SetS(Device::bitStateLedControllerPtr->digitStates[3]);
-		BitLedStateLetterHelper::SetE(Device::bitStateLedControllerPtr->digitStates[2]);
-		BitLedStateLetterHelper::SetA(Device::bitStateLedControllerPtr->digitStates[1]);
-		BitLedStateLetterHelper::SetR(Device::bitStateLedControllerPtr->digitStates[0]);
+		Device::ShowSearch();
 	}
 	else
 	{
@@ -100,18 +97,16 @@ void SensorsMode::ReadAndDisplay(void)
 	if(nextMillisecondsToMeasure > DateTime::milliseconds)
 		return;
 	
-	nextMillisecondsToMeasure  = DateTime::milliseconds + 1000;
+	nextMillisecondsToMeasure  = DateTime::milliseconds + SENSORS_MODE_MEASUREMENT_FREQUENCY;
 	
+	uint16_t temperatureToShow;
 	uint8_t checkResult = Device::oneWireContextPtr->ReadTemperature(&temperatureToShow);
 	
 	if(checkResult)
 		Device::ShowTemperature(temperatureToShow);
 	else
 	{
-		BitLedState::ClearDigit(Device::bitStateLedControllerPtr->digitStates[3]);
-		BitLedStateLetterHelper::SetE(Device::bitStateLedControllerPtr->digitStates[2]);
-		BitLedStateLetterHelper::SetR(Device::bitStateLedControllerPtr->digitStates[1]);
-		BitLedStateLetterHelper::SetR(Device::bitStateLedControllerPtr->digitStates[0]);
+		Device::ShowError();
 		
 		_delay_ms(1000);
 		Device::modesControllerPtr->SetCurrentMode(Device::monitorModePtr);

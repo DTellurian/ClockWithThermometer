@@ -24,7 +24,7 @@ MainMode::MainMode(void)
 
 void MainMode::ProceedModeOnTick(void)
 {	
-	CFTime currentTime = Device::GetCurrentTime();						
+	CFTime currentTime = Device::GetCurrentTime();
 	Device::ledHelperPtr->ShowTime(&currentTime, 0);
 }
 //---------------------------------------------------------------------------

@@ -14,6 +14,14 @@
 #include "..\Buttons\ButtonsControllerConsumer.h"
 //---------------------------------------------------------------------------
 
+enum MonitorState
+{
+	ModeNameDisplay,
+	TimeDisplay,
+	SensorsDisplay
+};
+//---------------------------------------------------------------------------
+
 class MonitorMode : public Mode, public ButtonsControllerConsumer
 {
 	//variables
@@ -35,7 +43,12 @@ class MonitorMode : public Mode, public ButtonsControllerConsumer
 	private:
 		//MonitorMode( const MonitorMode &c );
 		MonitorMode& operator=( const MonitorMode &c );
-
+		
+		uint8_t sensorIndex;
+		MonitorState monitorState;
+		uint64_t nextStateShowTime;
+		
+		uint64_t nextMillisecondsToSensorMeasure;
 }; //MonitorMode
 //---------------------------------------------------------------------------
 #endif //__MONITORMODE_H__

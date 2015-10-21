@@ -17,6 +17,7 @@
 #include "BaseTypes\CFTime.h"
 #include "BaseTypes\DateTime.h"
 #include "DS18B20Support\DS18B20.h"
+#include "SevenDigitLed\BitLedStateLetterHelper.h"
 //---------------------------------------------------------------------------
 
 #define APIN pinB5
@@ -183,9 +184,9 @@ void Device::ShowTemperature(uint16_t temperatureValue)
 	if(integralPart > 9)
 	{
 		if(isPositive)
-		BitLedState::ClearDigit(bitStateLedControllerPtr->digitStates[3]);
+			BitLedState::ClearDigit(bitStateLedControllerPtr->digitStates[3]);
 		else
-		BitLedState::SetMinus(bitStateLedControllerPtr->digitStates[3]);
+			BitLedState::SetMinus(bitStateLedControllerPtr->digitStates[3]);
 		
 		BitLedState::SetDigitState(integralPart, bitStateLedControllerPtr->digitStates[2], bitStateLedControllerPtr->digitStates[1]);
 		BitLedState::SetDigitState(fractionPart, bitStateLedControllerPtr->digitStates[0]);
@@ -221,5 +222,32 @@ void Device::LedOff(void)
 void Device::LedOn(void)
 {
 	isLedEnabled = 1;
+}
+//---------------------------------------------------------------------------
+
+void Device::ShowSearch(void)
+{
+	BitLedStateLetterHelper::SetS(Device::bitStateLedControllerPtr->digitStates[3]);
+	BitLedStateLetterHelper::SetE(Device::bitStateLedControllerPtr->digitStates[2]);
+	BitLedStateLetterHelper::SetA(Device::bitStateLedControllerPtr->digitStates[1]);
+	BitLedStateLetterHelper::SetR(Device::bitStateLedControllerPtr->digitStates[0]);	
+}
+//---------------------------------------------------------------------------
+
+void Device::ShowError(void)
+{
+	BitLedState::ClearDigit(Device::bitStateLedControllerPtr->digitStates[3]);
+	BitLedStateLetterHelper::SetE(Device::bitStateLedControllerPtr->digitStates[2]);
+	BitLedStateLetterHelper::SetR(Device::bitStateLedControllerPtr->digitStates[1]);
+	BitLedStateLetterHelper::SetR(Device::bitStateLedControllerPtr->digitStates[0]);
+}
+//---------------------------------------------------------------------------
+
+void Device::ClearScreen(void)
+{
+	bitStateLedControllerPtr->digitStates[0] = 0;
+	bitStateLedControllerPtr->digitStates[1] = 0;
+	bitStateLedControllerPtr->digitStates[2] = 0;
+	bitStateLedControllerPtr->digitStates[3] = 0;
 }
 //---------------------------------------------------------------------------

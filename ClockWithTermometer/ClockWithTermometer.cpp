@@ -45,7 +45,8 @@ int main(void)
 	Device::mainModePtr = &mainMode;
 	Device::buttonsControllerPtr->AttachConsumer(Device::mainModePtr);
 	
-	TimeSetMode timeSetMode = TimeSetMode();
+	//TimeSetMode timeSetMode = TimeSetMode();
+	TimeSetMode timeSetMode;
 	Device::timeSetModePtr = &timeSetMode;
 	Device::buttonsControllerPtr->AttachConsumer(Device::timeSetModePtr);
 

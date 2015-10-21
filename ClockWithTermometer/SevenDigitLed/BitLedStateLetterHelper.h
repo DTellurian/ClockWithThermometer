@@ -32,6 +32,7 @@ class BitLedStateLetterHelper
 		static void SetS(uint8_t& digitState);
 		static void SetF(uint8_t& digitState);
 		static void SetD(uint8_t& digitState);
+		static void SetP(uint8_t& digitState);
 		
 		~BitLedStateLetterHelper();
 	protected:

@@ -35,8 +35,7 @@ class SensorsMode : public Mode, public ButtonsControllerConsumer
 		//SensorsMode( const SensorsMode &c );
 		SensorsMode& operator=( const SensorsMode &c );
 		
-		uint8_t displayValue;
-		uint16_t temperatureToShow;
+		uint8_t displayValue;		
 		uint64_t nextMillisecondsToMeasure;
 		
 		void ReadAndDisplay(void);

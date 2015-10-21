@@ -72,13 +72,17 @@ class Device
 		static void SetWakeUpButtonsSettings(void);
 		
 		static uint8_t isLedEnabled;
+		
+		static void ShowSearch(void);
+		static void ShowError(void);
+		static void ClearScreen(void);
 	private:
 		Device(void);
 		Device(Device&);
 		
 		static BitStateLedController bitStateLedController;
 		//static void InitTimer0(void);
-		static void init_timer2(void);
+		static void init_timer2(void);				
 		
 };
 
