@@ -42,8 +42,7 @@ class BitLedState
 		static void SetDigitPinState(uint8_t decimalValue, uint8_t& digitState);
 	
 		BitLedState(void);
-		BitLedState(const BitLedState&c);
-		BitLedState& operator=( const BitLedState&c );
+		BitLedState(const BitLedState&);
 };
 //---------------------------------------------------------------------------
 

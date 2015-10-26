@@ -7,13 +7,13 @@
 //---------------------------------------------------------------------------
 
 #include "MainMode.h"
+
+#include <avr\sleep.h>
+#include <util\delay.h>
 #include "..\Device.h"
 #include "..\Device\Ports.h"
 #include "..\BaseTypes\rtc.h"
 #include "..\BaseTypes\DateTime.h"
-
-//#include <avr\sleep.h>
-//#include <util\delay.h>
 //---------------------------------------------------------------------------
 
 MainMode::MainMode(void)

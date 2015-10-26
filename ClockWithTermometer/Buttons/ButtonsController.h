@@ -19,17 +19,15 @@
 class ButtonsController 
 {
 	public:
-		ButtonsController(void);		
+		ButtonsController(void);
+		
 		
 		virtual void ButtonsControllerOnTick(void);
 		friend class Button;
 		
 		void AttachButton(Button* buttonPtr);
 		void AttachConsumer(ButtonsControllerConsumer* consumerPtr);	
-	private:
-		ButtonsController(const ButtonsController& c);
-		ButtonsController& operator=(const ButtonsController& c);
-		
+	private:				
 		//Button** buttons;
 		Button* buttons[ButtonsControllerButtonsCount];
 		uint8_t attachedButtonsCount;

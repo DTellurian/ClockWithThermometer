@@ -15,7 +15,7 @@ volatile uint16_t DateTime::ticksCount = 0;
 uint16_t DateTime::ticksInSecond = 0;
 uint16_t DateTime::millisecondsInTick = 0;
 CFTime DateTime::CurrentTime = CFTime();
-CFDate DateTime::CurrentDate;
+CFDate DateTime::CurrentDate = CFDate();
 
 void DateTime::Initialize(uint16_t ticksInSecond, uint16_t millisecondsInTick)
 {

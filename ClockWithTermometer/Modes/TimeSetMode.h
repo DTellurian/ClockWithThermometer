@@ -28,9 +28,6 @@ class TimeSetMode : public Mode, public ButtonsControllerConsumer
 		virtual void ProceedButtonUpFire(Button* buttonPtr, uint8_t& handled);
 				
 	private:
-		TimeSetMode( const TimeSetMode &c );
-		TimeSetMode& operator=( const TimeSetMode &c );
-	
 		uint8_t isMinutesEditing;
 		void SetTime(void);
 };

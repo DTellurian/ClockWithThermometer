@@ -32,7 +32,7 @@ class SensorsMode : public Mode, public ButtonsControllerConsumer
 		virtual void ProceedButtonUpFire(Button* buttonPtr, uint8_t& handled);
 	protected:
 	private:
-		SensorsMode( const SensorsMode &c );
+		//SensorsMode( const SensorsMode &c );
 		SensorsMode& operator=( const SensorsMode &c );
 		
 		uint8_t displayValue;		

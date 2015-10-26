@@ -24,8 +24,6 @@ class MainMode : public Mode, public ButtonsControllerConsumer
 		virtual void ProceedButtonFire(Button* buttonPtr, uint8_t isSealedFire, uint8_t sealedFireNumber, uint8_t& handled);
 		virtual void ProceedButtonUpFire(Button* buttonPtr, uint8_t& handled);
 	private:
-		MainMode( const MainMode&c );
-		MainMode& operator=( const MainMode&c );
 };
 //---------------------------------------------------------------------------
 #endif /* MAINMODE_H_ */

@@ -24,9 +24,6 @@ class TimerMode : public Mode, public ButtonsControllerConsumer
 		virtual void ProceedButtonFire(Button* buttonPtr, uint8_t isSealedFire, uint8_t sealedFireNumber, uint8_t& handled);
 		virtual void ProceedButtonUpFire(Button* buttonPtr, uint8_t& handled);
 	private:
-		TimerMode( const TimerMode &c );
-		TimerMode& operator=( const TimerMode &c );
-	
 		uint8_t isRun;
 		uint64_t startSecondsCount;
 		uint64_t lastMeasuredSecondsCount;

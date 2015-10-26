@@ -26,10 +26,6 @@ class Mode
 		virtual void ExitMode(void){};
 		
 		uint8_t isActive;
-		
-	private:
-		Mode( const Mode&c );
-		Mode& operator=( const Mode&c );
 };
 //---------------------------------------------------------------------------
 #endif /* MODE_H_ */

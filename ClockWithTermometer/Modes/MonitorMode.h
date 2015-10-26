@@ -41,7 +41,7 @@ class MonitorMode : public Mode, public ButtonsControllerConsumer
 		virtual void ProceedButtonUpFire(Button* buttonPtr, uint8_t& handled);
 	protected:
 	private:
-		MonitorMode( const MonitorMode &c );
+		//MonitorMode( const MonitorMode &c );
 		MonitorMode& operator=( const MonitorMode &c );
 		
 		uint8_t sensorIndex;

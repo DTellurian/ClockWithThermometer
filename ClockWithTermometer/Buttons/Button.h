@@ -53,8 +53,7 @@ class Button
 		
 		virtual uint8_t IsPressed(void){return 0;};	
 	private:
-		Button(const Button& c);
-		Button& operator=(const Button& c);
+		
 };
 //---------------------------------------------------------------------------
 #endif /* BUTTON_H_ */

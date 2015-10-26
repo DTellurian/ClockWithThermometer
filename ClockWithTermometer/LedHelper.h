@@ -33,8 +33,6 @@ class LedHelper
 		
 		void ShowAllBlinked(void);
 	private:
-		LedHelper(const LedHelper& c);
-		LedHelper& operator=(const LedHelper& c);
 };
 //---------------------------------------------------------------------------
 #endif /* LEDHELPER_H_ */

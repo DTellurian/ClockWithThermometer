@@ -23,8 +23,7 @@ class ModesController
 		Mode* currentModePtr;
 	protected:
 	private:		
-		ModesController( const ModesController&c );
-		ModesController& operator=( const ModesController&c );
+		
 };
 //---------------------------------------------------------------------------
 #endif /* MODESCONTROLLER_H_ */
