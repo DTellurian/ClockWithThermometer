@@ -48,6 +48,9 @@ class CFTime
 		uint8_t GetMinutes(void) const;
 		uint8_t GetSeconds(void) const;
 	private:
+		//CFTime(const CFTime& c);
+		CFTime& operator=(const CFTime& c);
+		
 		volatile uint8_t hours;
 		volatile uint8_t minutes;
 		volatile uint8_t seconds;

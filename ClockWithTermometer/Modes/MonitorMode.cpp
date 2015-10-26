@@ -115,7 +115,7 @@ void MonitorMode::EnterMode(void)
 	nextStateShowTime = DateTime::milliseconds + MONITOR_MODE_STATE_PERIOD_MS;
 	
 	BitLedStateLetterHelper::SetD(Device::bitStateLedControllerPtr->digitStates[3]);
-	BitLedStateLetterHelper::SetI(Device::bitStateLedControllerPtr->digitStates[2]);
+	BitLedStateLetterHelper::SetS(Device::bitStateLedControllerPtr->digitStates[2]);
 	BitLedStateLetterHelper::SetP(Device::bitStateLedControllerPtr->digitStates[1]);
 	BitLedStateLetterHelper::SetL(Device::bitStateLedControllerPtr->digitStates[0]);
 }

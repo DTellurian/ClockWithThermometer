@@ -25,6 +25,9 @@ class CFDate
 		uint8_t GetDaysInterval(uint8_t externDayNumber);
 	private:
 		volatile uint8_t dayNumber;
+		
+		//CFDate(const CFDate& c);
+		CFDate& operator=(const CFDate& c);
 };
 //---------------------------------------------------------------------------
 #endif /* CFDATE_H_ */
