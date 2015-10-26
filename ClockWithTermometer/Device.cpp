@@ -16,7 +16,8 @@
 #include "SevenDigitLed\BitLedState.h"
 #include "BaseTypes\CFTime.h"
 #include "BaseTypes\DateTime.h"
-
+#include "DS18B20Support\DS18B20.h"
+#include "SevenDigitLed\BitLedStateLetterHelper.h"
 //---------------------------------------------------------------------------
 
 #define APIN pinB5
@@ -51,8 +52,14 @@ Button* Device::bottomButtonPtr;
 MainMode* Device::mainModePtr;
 TimeSetMode* Device::timeSetModePtr;
 TimerMode* Device::timerModePtr;
+SensorsMode* Device::sensor1ModePtr;
+MonitorMode* Device::monitorModePtr;
+IdleMode* Device::idleModePtr;
 
 LedHelper* Device::ledHelperPtr;
+OneWireContext* Device::oneWireContextPtr;
+
+uint8_t Device::isLedEnabled = 1;
 //---------------------------------------------------------------------------
 
 void Device::Initialize(void)
@@ -74,25 +81,45 @@ void Device::Initialize(void)
 	bitStateLedControllerPtr->digitPins[2] = &dig2PIN;
 	bitStateLedControllerPtr->digitPins[3] = &dig1PIN;
 	
-	Device::topButtonPtr->enabled = 1;
-	Device::topButtonPtr->enabledButtonUpFire = 1;
-	Device::topButtonPtr->enableSealing = 0;
-	Device::topButtonPtr->SetDelay(1000);
-	Device::topButtonPtr->enabledButtonUpFire = 1;
-	Device::topButtonPtr->buttonUpDelayMs = 50;
-		
-	Device::bottomButtonPtr->enabled = 1;
-	Device::bottomButtonPtr->SetDelay(500);
-	Device::bottomButtonPtr->enableSealing = 1;
-	Device::bottomButtonPtr->SetSealingDelay(150, 150);
-	Device::bottomButtonPtr->enabledButtonUpFire = 1;
-	Device::bottomButtonPtr->buttonUpDelayMs = 50;
+	Device::SetCommonButtonsSettings();
+	
+	Device::oneWireContextPtr->Init();
 	
 	DateTime::Initialize(260, 4);
 	
 	sei();
 	
 	init_timer2();
+}
+//---------------------------------------------------------------------------
+
+void Device::SetCommonButtonsSettings(void)
+{
+	Device::topButtonPtr->enabled = 1;
+	Device::topButtonPtr->enabledButtonUpFire = 1;
+	Device::topButtonPtr->enableSealing = 0;
+	Device::topButtonPtr->SetDelay(1000);
+	Device::topButtonPtr->enabledButtonUpFire = 1;
+	Device::topButtonPtr->buttonUpDelayMs = 50;
+	
+	Device::bottomButtonPtr->enabled = 1;
+	Device::bottomButtonPtr->SetDelay(500);
+	Device::bottomButtonPtr->enableSealing = 1;
+	Device::bottomButtonPtr->SetSealingDelay(150, 150);
+	Device::bottomButtonPtr->enabledButtonUpFire = 1;
+	Device::bottomButtonPtr->buttonUpDelayMs = 50;	
+}
+//---------------------------------------------------------------------------
+
+void Device::SetWakeUpButtonsSettings(void)
+{	
+	Device::topButtonPtr->enabledButtonUpFire = 0;	
+	Device::topButtonPtr->SetDelay(2000);
+	Device::topButtonPtr->enabledButtonUpFire = 0;	
+		
+	Device::bottomButtonPtr->SetDelay(2000);
+	Device::bottomButtonPtr->enableSealing = 0;	
+	Device::bottomButtonPtr->enabledButtonUpFire = 0;	
 }
 //---------------------------------------------------------------------------
 //
@@ -118,7 +145,8 @@ ISR(TIMER2_COMPA_vect)
 	DateTime::OnMillisecondsTick();
 	DateTime::OnSecondsTick();
 	
-	Device::bitStateLedControllerPtr->NextDigit();
+	if(Device::isLedEnabled == 1)
+		Device::bitStateLedControllerPtr->NextDigit();
 }
 //---------------------------------------------------------------------------
 
@@ -135,5 +163,91 @@ void Device::SetCurrentTiem(CFTime* timePtr)
 	currentTime.hour = timePtr->GetHours();
 	currentTime.minute = timePtr->GetMinutes();
 	set_date_time(currentTime);
+}
+//---------------------------------------------------------------------------
+
+void Device::ShowTemperature(uint16_t temperatureValue)
+{
+	uint8_t isPositive = 0;
+	uint8_t integralPart = 0;
+	uint8_t fractionPart = 0;
+
+	BitLedState::SetDot(0, Device::bitStateLedControllerPtr->digitStates[2]);
+	BitLedState::SetDot(1, Device::bitStateLedControllerPtr->digitStates[1]);
+
+	ConvertTemperatureMeasurement(temperatureValue, isPositive, integralPart, fractionPart);
+	
+	cli();
+	//currentState = __save_interrupt();
+	//__disable_interrupt();
+	
+	if(integralPart > 9)
+	{
+		if(isPositive)
+			BitLedState::ClearDigit(bitStateLedControllerPtr->digitStates[3]);
+		else
+			BitLedState::SetMinus(bitStateLedControllerPtr->digitStates[3]);
+		
+		BitLedState::SetDigitState(integralPart, bitStateLedControllerPtr->digitStates[2], bitStateLedControllerPtr->digitStates[1]);
+		BitLedState::SetDigitState(fractionPart, bitStateLedControllerPtr->digitStates[0]);
+	}
+	else
+	{
+		BitLedState::ClearDigit(bitStateLedControllerPtr->digitStates[3]);
+		
+		if(isPositive)
+		BitLedState::ClearDigit(bitStateLedControllerPtr->digitStates[2]);
+		else
+		BitLedState::SetMinus(bitStateLedControllerPtr->digitStates[2]);
+		
+		BitLedState::SetDigitState(integralPart, bitStateLedControllerPtr->digitStates[1]);
+		BitLedState::SetDigitState(fractionPart, bitStateLedControllerPtr->digitStates[0]);
+	}
+	//__restore_interrupt(currentState);
+	sei();
+}
+//---------------------------------------------------------------------------
+
+void Device::LedOff(void)
+{
+	isLedEnabled = 0;
+	
+	dig1PIN.SetHightLevel();
+	dig2PIN.SetHightLevel();
+	dig3PIN.SetHightLevel();
+	dig4PIN.SetHightLevel();
+}
+//---------------------------------------------------------------------------
+
+void Device::LedOn(void)
+{
+	isLedEnabled = 1;
+}
+//---------------------------------------------------------------------------
+
+void Device::ShowSearch(void)
+{
+	BitLedStateLetterHelper::SetS(Device::bitStateLedControllerPtr->digitStates[3]);
+	BitLedStateLetterHelper::SetE(Device::bitStateLedControllerPtr->digitStates[2]);
+	BitLedStateLetterHelper::SetA(Device::bitStateLedControllerPtr->digitStates[1]);
+	BitLedStateLetterHelper::SetR(Device::bitStateLedControllerPtr->digitStates[0]);	
+}
+//---------------------------------------------------------------------------
+
+void Device::ShowError(void)
+{
+	BitLedState::ClearDigit(Device::bitStateLedControllerPtr->digitStates[3]);
+	BitLedStateLetterHelper::SetE(Device::bitStateLedControllerPtr->digitStates[2]);
+	BitLedStateLetterHelper::SetR(Device::bitStateLedControllerPtr->digitStates[1]);
+	BitLedStateLetterHelper::SetR(Device::bitStateLedControllerPtr->digitStates[0]);
+}
+//---------------------------------------------------------------------------
+
+void Device::ClearScreen(void)
+{
+	bitStateLedControllerPtr->digitStates[0] = 0;
+	bitStateLedControllerPtr->digitStates[1] = 0;
+	bitStateLedControllerPtr->digitStates[2] = 0;
+	bitStateLedControllerPtr->digitStates[3] = 0;
 }
 //---------------------------------------------------------------------------

@@ -6,6 +6,7 @@
  */ 
 
 //---------------------------------------------------------------------------
+
 #include "DeviceConfiguration.h"
 
 #include <avr\io.h>
@@ -14,16 +15,15 @@
 #include "Device.h"
 #include "Device\Ports.h"
 #include "BaseTypes\rtc.h"
-#include "ModesSupport\ModesController.h"
-#include "Modes\MainMode.h"
-#include "Buttons\SimpleButton.h"
-#include "Modes\TimeSetMode.h"
+#include "ModesSupport/ModesController.h"
+#include "Buttons/SimpleButton.h"
+#include "SevenDigitLed/BitLedStateLetterHelper.h"
 //---------------------------------------------------------------------------
 
 #include "BaseTypes/DateTime.h"
 
 int main(void)
-{
+{	
 	LedHelper ledHelper = LedHelper();
 	Device::ledHelperPtr = &ledHelper;
 	
@@ -45,13 +45,29 @@ int main(void)
 	Device::mainModePtr = &mainMode;
 	Device::buttonsControllerPtr->AttachConsumer(Device::mainModePtr);
 	
-	TimeSetMode timeSetMode = TimeSetMode();
+	//TimeSetMode timeSetMode = TimeSetMode();
+	TimeSetMode timeSetMode;
 	Device::timeSetModePtr = &timeSetMode;
 	Device::buttonsControllerPtr->AttachConsumer(Device::timeSetModePtr);
 
 	TimerMode timerMode = TimerMode();
 	Device::timerModePtr = &timerMode;
 	Device::buttonsControllerPtr->AttachConsumer(Device::timerModePtr);
+	
+	SensorsMode sensorsMode = SensorsMode();
+	Device::sensor1ModePtr = &sensorsMode;
+	Device::buttonsControllerPtr->AttachConsumer(Device::sensor1ModePtr);
+	
+	MonitorMode monitorMode = MonitorMode();
+	Device::monitorModePtr = &monitorMode;
+	Device::buttonsControllerPtr->AttachConsumer(Device::monitorModePtr);
+	
+	IdleMode idleMode = IdleMode();
+	Device::idleModePtr = &idleMode;
+	Device::buttonsControllerPtr->AttachConsumer(Device::idleModePtr);
+	
+	OneWireContext oneWireContext = OneWireContext(2);
+	Device::oneWireContextPtr = &oneWireContext;
 	
 	Device::Initialize();
 	
@@ -74,7 +90,14 @@ int main(void)
 		set_date_time(dt);
 	}
 	
-	Device::modesControllerPtr->SetCurrentMode(Device::mainModePtr);
+	Device::modesControllerPtr->SetCurrentMode(Device::mainModePtr);	
+	
+	BitLedStateLetterHelper::SetH(Device::bitStateLedControllerPtr->digitStates[3]);
+	BitLedStateLetterHelper::SetE(Device::bitStateLedControllerPtr->digitStates[2]);
+	BitLedStateLetterHelper::SetL(Device::bitStateLedControllerPtr->digitStates[1]);
+	BitLedStateLetterHelper::SetO(Device::bitStateLedControllerPtr->digitStates[0]);
+	
+	_delay_ms(5000);
 	
 	while(1)
 	{
