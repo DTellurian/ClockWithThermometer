@@ -33,7 +33,8 @@ class BitStateLedController
 		void NextDigit(void);
 	private:
 		BitStateLedController(void);
-		BitStateLedController(const BitStateLedController&);
+		BitStateLedController(const BitStateLedController& c);
+		BitStateLedController& operator=(const BitStateLedController& c);
 	
 		uint8_t currentDigitIndex;
 		

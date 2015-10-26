@@ -11,6 +11,7 @@
 
 //---------------------------------------------------------------------------
 
+#include "DeviceConfiguration.h"
 #include "SevenDigitLed/BitStateLedController.h"
 #include "BaseTypes/rtc.h"
 #include "ModesSupport/ModesController.h"

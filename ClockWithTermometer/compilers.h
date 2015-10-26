@@ -14,6 +14,8 @@
 #ifndef COMPILERS_H
 #define COMPILERS_H
 
+#include "DeviceConfiguration.h" //It placed here to awoid warning in delay.h, #warning "F_CPU not defined for
+
 //________________________________________
 #ifdef  __ICCAVR__
 #include <ioavr.h>
