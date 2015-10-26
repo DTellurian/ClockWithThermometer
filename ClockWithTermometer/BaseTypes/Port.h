@@ -21,6 +21,10 @@ class Port
 		volatile uint8_t* portInOutStatePtr; //DDRD
 		volatile uint8_t* portPinStatePtr; //PORTD
 		volatile uint8_t* portPinRegisterPtr; //PIND
+	
+	private:
+		Port(const Port& c);
+		Port& operator=(const Port& c);
 };
 //---------------------------------------------------------------------------
 #endif /* PORT_H_ */

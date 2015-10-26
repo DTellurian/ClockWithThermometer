@@ -23,6 +23,8 @@ class SimpleButton : public Button
 		
 	private:
 		SimpleButton(void);
+		SimpleButton(const SimpleButton& c);
+		SimpleButton& operator=(const SimpleButton& c);
 		
 		Pin* pinPtr;
 };

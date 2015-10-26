@@ -39,7 +39,7 @@ class IdleMode : public Mode, public ButtonsControllerConsumer
 		virtual void ProceedButtonUpFire(Button* buttonPtr, uint8_t& handled);
 	protected:
 	private:
-		//IdleMode( const IdleMode &c );
+		IdleMode( const IdleMode &c );
 		IdleMode& operator=( const IdleMode &c );
 		
 		IdleModeState state;

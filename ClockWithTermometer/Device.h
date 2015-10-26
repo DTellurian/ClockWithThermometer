@@ -11,6 +11,7 @@
 
 //---------------------------------------------------------------------------
 
+#include "DeviceConfiguration.h"
 #include "SevenDigitLed/BitStateLedController.h"
 #include "BaseTypes/rtc.h"
 #include "ModesSupport/ModesController.h"
@@ -29,7 +30,7 @@
 #define BUTTON_INTERRUPT_TIMEOUT_MS 100
 //---------------------------------------------------------------------------
 
-//#define SIMULATION
+#define SIMULATION
 
 enum DeviceStates
 {

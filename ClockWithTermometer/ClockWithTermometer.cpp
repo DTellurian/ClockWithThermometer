@@ -24,24 +24,24 @@
 
 int main(void)
 {	
-	LedHelper ledHelper = LedHelper();
+	LedHelper ledHelper;
 	Device::ledHelperPtr = &ledHelper;
 	
-	ModesController modesController = ModesController();
+	ModesController modesController;
 	Device::modesControllerPtr = &modesController;
 	
-	ButtonsController buttonsController = ButtonsController();
+	ButtonsController buttonsController;
 	Device::buttonsControllerPtr = &buttonsController;
 	
-	SimpleButton topButton = SimpleButton(Device::buttonsControllerPtr, &pinD2, 500);
+	SimpleButton topButton(Device::buttonsControllerPtr, &pinD2, 500);
 	Device::topButtonPtr = &topButton;
 	Device::buttonsControllerPtr->AttachButton(&topButton);
 	
-	SimpleButton bottomButton = SimpleButton(Device::buttonsControllerPtr, &pinD3, 500);
+	SimpleButton bottomButton(Device::buttonsControllerPtr, &pinD3, 500);
 	Device::bottomButtonPtr = &bottomButton;
 	Device::buttonsControllerPtr->AttachButton(&bottomButton);
 	
-	MainMode mainMode = MainMode();
+	MainMode mainMode;
 	Device::mainModePtr = &mainMode;
 	Device::buttonsControllerPtr->AttachConsumer(Device::mainModePtr);
 	
@@ -50,19 +50,19 @@ int main(void)
 	Device::timeSetModePtr = &timeSetMode;
 	Device::buttonsControllerPtr->AttachConsumer(Device::timeSetModePtr);
 
-	TimerMode timerMode = TimerMode();
+	TimerMode timerMode;
 	Device::timerModePtr = &timerMode;
 	Device::buttonsControllerPtr->AttachConsumer(Device::timerModePtr);
 	
-	SensorsMode sensorsMode = SensorsMode();
+	SensorsMode sensorsMode;
 	Device::sensor1ModePtr = &sensorsMode;
 	Device::buttonsControllerPtr->AttachConsumer(Device::sensor1ModePtr);
 	
-	MonitorMode monitorMode = MonitorMode();
+	MonitorMode monitorMode;
 	Device::monitorModePtr = &monitorMode;
 	Device::buttonsControllerPtr->AttachConsumer(Device::monitorModePtr);
 	
-	IdleMode idleMode = IdleMode();
+	IdleMode idleMode;
 	Device::idleModePtr = &idleMode;
 	Device::buttonsControllerPtr->AttachConsumer(Device::idleModePtr);
 	
