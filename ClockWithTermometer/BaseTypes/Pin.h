@@ -32,9 +32,6 @@ class Pin
 		
 		void Reverse(void);
 	private:
-		Pin(const Pin& c);
-		Pin& operator=(const Pin& c);
-	
 		Port* portPtr;
 		int portPinNumber; //DDD3
 		int pinNumber; //PIND3
